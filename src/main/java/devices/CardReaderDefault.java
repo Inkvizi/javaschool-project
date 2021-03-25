@@ -1,6 +1,7 @@
 package devices;
 
 import authentication.Card;
+import authentication.Decoder;
 import client.ClientData;
 import client.ClientDataDefault;
 
@@ -11,6 +12,7 @@ public class CardReaderDefault implements CardReader {
     public ClientData inputCard(Card card) {
         String secretData = card.getAuthenticationData();
         //декодируем и составляем объект клиента
+        String decodedData = Decoder.decode(secretData);
         client = new ClientDataDefault();
         return client;
     }
