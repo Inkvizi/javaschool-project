@@ -1,6 +1,8 @@
 package services.operation;
 
+import java.math.BigDecimal;
+
 public interface Balance {
-    double getAmount();
-    String getCurrency();
+    BigDecimal getAmount();
+    Currency getCurrency();
 }

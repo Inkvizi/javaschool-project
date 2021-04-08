@@ -1,6 +1,6 @@
 package client;
 
 public interface ClientData {
-    String getClientName();
-    String getClientCode();
+    String getName();
+    String getCode();
 }

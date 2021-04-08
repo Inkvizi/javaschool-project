@@ -6,10 +6,12 @@ import services.ClientServices;
 import services.ClientServicesDefault;
 import services.operation.Balance;
 
+import java.util.Optional;
+
 public class TerminalDefault implements Terminal{
-    private CardReader cardReader;
-    private Display display;
-    private ClientServices services;
+    private final CardReader cardReader;
+    private final Display display;
+    private final ClientServices services;
     private boolean isVacant;
     private ClientData client;
 
@@ -27,8 +29,9 @@ public class TerminalDefault implements Terminal{
 
     @Override
     public void startSession(Card card) {
-        client = cardReader.inputCard(card);
-        if (client != null) {
+        Optional<ClientData> clientDataOptional = cardReader.inputCard(card);
+        if (clientDataOptional.isPresent()) {
+            client = clientDataOptional.get();
             display.showWelcomeClient(client);
             isVacant = false;
         }

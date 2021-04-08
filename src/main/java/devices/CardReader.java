@@ -3,7 +3,9 @@ package devices;
 import authentication.Card;
 import client.ClientData;
 
+import java.util.Optional;
+
 public interface CardReader {
-    ClientData inputCard(Card card);
+    Optional<ClientData> inputCard(Card card);
     void extractCard();
 }

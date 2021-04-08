@@ -1,6 +1,6 @@
 package authentication;
 
-public class CardMagnet implements Card{
+public class CardMagnetic implements Card{
     @Override
     public String getAuthenticationData() {
         return "abracadabraData";

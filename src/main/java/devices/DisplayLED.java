@@ -13,7 +13,7 @@ public class DisplayLED implements Display {
 
     @Override
     public void showWelcomeClient(ClientData client) {
-        String welcome = "Здравствуйте, " + client.getClientName();
+        String welcome = "Здравствуйте, " + client.getName();
         //показываем экран приветствия для клиента
     }
 

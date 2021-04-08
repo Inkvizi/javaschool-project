@@ -1,20 +1,22 @@
 package services.operation;
 
-public class BalanceCard implements Balance{
-    private double amount;
-    private String currency;
+import java.math.BigDecimal;
 
-    public BalanceCard(double amount, String currency) {
+public class BalanceCard implements Balance{
+    private final BigDecimal amount;
+    private final Currency currency;
+
+    public BalanceCard(BigDecimal amount, Currency currency) {
         this.amount = amount;
         this.currency = currency;
     }
     @Override
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
     @Override
-    public String getCurrency() {
+    public Currency getCurrency() {
         return currency;
     }
 }
