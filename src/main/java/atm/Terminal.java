@@ -1,9 +1,7 @@
-package devices;
-
-import authentication.Card;
+package atm;
 
 public interface Terminal {
-    void startSession(Card card);
+    boolean startSession();
     boolean checkIsVacant(); //необходимость зависит от задачи, для клиента достаточно видеть на экране приветствие
     void showBalance();
     void stopSession();

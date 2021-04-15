@@ -1,20 +1,20 @@
-package devices;
+package atm.devices.display;
 
-import client.ClientData;
-import services.operation.Balance;
+import bank.client.Client;
+import bank.services.operation.Balance;
 
 import java.text.DecimalFormat;
 
 public class DisplayLED implements Display {
     @Override
     public void showWelcome() {
-        //показываем экран приветствия
+        System.out.println("Добро пожаловать!");
     }
 
     @Override
-    public void showWelcomeClient(ClientData client) {
+    public void showWelcomeClient(Client client) {
         String welcome = "Здравствуйте, " + client.getName();
-        //показываем экран приветствия для клиента
+        System.out.println(welcome);
     }
 
     @Override
@@ -23,5 +23,11 @@ public class DisplayLED implements Display {
         String balanceMessage = "Ваш баланс на текущий момент: "
                 + formatter.format(balance.getAmount()) + " "
                 + balance.getCurrency();
+        System.out.println(balanceMessage);
+    }
+
+    @Override
+    public void showError(String errorText) {
+        System.out.println(errorText);
     }
 }
