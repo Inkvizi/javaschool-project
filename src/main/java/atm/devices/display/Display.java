@@ -1,11 +1,11 @@
 package atm.devices.display;
 
-import bank.client.Client;
-import bank.services.operation.Balance;
+import atm.balance.BalanceData;
+import atm.client.ClientData;
 
 public interface Display {
     void showWelcome();
-    void showWelcomeClient(Client client);
-    void showBalance(Balance balance);
+    void showWelcomeClient(ClientData client);
+    void showBalance(BalanceData balance);
     void showError(String errorText);
 }

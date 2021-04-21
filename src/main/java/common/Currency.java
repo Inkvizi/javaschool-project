@@ -1,4 +1,4 @@
-package bank.services.operation;
+package common;
 
 public enum Currency {
     RUR

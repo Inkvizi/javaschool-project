@@ -10,5 +10,5 @@ public interface Client {
     boolean hasCard(Card card);
     boolean checkCardPin(Card sourceCard);
     boolean checkCardExpirationDate(Card sourceCard);
-    Balance getBalance(Card card);
+    Account getAccountByCard(Card card);
 }

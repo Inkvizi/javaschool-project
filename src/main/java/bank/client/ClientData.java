@@ -4,7 +4,6 @@ import bank.card.Card;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.experimental.Delegate;
-import bank.services.operation.Balance;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,8 +34,8 @@ public class ClientData implements Client, Address {
     }
 
     @Override
-    public Balance getBalance(Card card) {
+    public Account getAccountByCard(Card card) {
         Optional<Account> accountOptional = accounts.stream().filter(account -> account.hasCard(card)).findAny();
-        return accountOptional.get().getBalance();
+        return accountOptional.get();
     }
 }

@@ -1,5 +1,6 @@
 package bank.services.operation;
 
+import common.Currency;
 import lombok.Getter;
 import lombok.Setter;
 

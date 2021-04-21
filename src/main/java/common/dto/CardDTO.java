@@ -1,4 +1,4 @@
-package atm.card;
+package common.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,8 +9,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class CardData {
+public class CardDTO {
     String number;
-    LocalDate expirationDate;
+    LocalDate expirationeDate;
     String pinCode;
 }

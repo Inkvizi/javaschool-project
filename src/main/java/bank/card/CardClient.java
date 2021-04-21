@@ -1,14 +1,15 @@
 package bank.card;
 
-import bank.card.Card;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @AllArgsConstructor
-@Getter
+@NoArgsConstructor
+@Data
 @EqualsAndHashCode
 public class CardClient implements Card {
     private String number;

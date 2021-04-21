@@ -1,28 +1,39 @@
 package atm;
 
-import bank.card.Card;
-import bank.Processing;
-import bank.client.Client;
+import atm.card.CardData;
+import atm.client.ClientData;
 import atm.devices.cardreader.CardReader;
 import atm.devices.display.Display;
 import atm.devices.input.InputReader;
+import atm.mappers.BalanceMapper;
+import atm.mappers.CardMapper;
+import atm.mappers.ClientMapper;
+import bank.Processing;
+import common.dto.BalanceDTO;
+import common.dto.CardDTO;
+import common.dto.ClientDTO;
 import common.dto.Responce;
-import bank.services.operation.Balance;
 
 public class TerminalDefault implements Terminal {
     private final CardReader cardReader;
     private final Display display;
     private final InputReader input;
     private final Processing processing;
+    private final CardMapper cardMapper;
+    private final ClientMapper clientMapper;
+    private final BalanceMapper balanceMapper;
     private boolean isVacant;
-    private Card card;
-    private Client client;
+    private CardData card;
+    private ClientData client;
 
     public TerminalDefault(CardReader cardReader, Display display, InputReader input) {
         this.cardReader = cardReader;
         this.display = display;
         this.input = input;
         this.processing = new Processing();
+        this.cardMapper = new CardMapper();
+        this.clientMapper = new ClientMapper();
+        this.balanceMapper = new BalanceMapper();
         isVacant = true;
         display.showWelcome();
     }
@@ -56,11 +67,11 @@ public class TerminalDefault implements Terminal {
 
     @Override
     public void showBalance() {
-        Responce<Balance> balanceResponce = processing.getBalance(client, card);
-        if (balanceResponce.isError()) {
-            display.showError(balanceResponce.getErrorMessage());
+        Responce<BalanceDTO> balanceResponse = processing.getBalance(clientMapper.toDTO(client), cardMapper.toDTO(card));
+        if (balanceResponse.isError()) {
+            display.showError(balanceResponse.getErrorMessage());
         } else {
-            display.showBalance(balanceResponce.getResponseValue());
+            display.showBalance(balanceMapper.toModel(balanceResponse.getResponseValue()));
         }
         stopInternal(); //возможно не нужно делать так как показываться баланс будет не долго
     }
@@ -75,22 +86,23 @@ public class TerminalDefault implements Terminal {
     private boolean checkInitCard() {
         String pinCode = input.readPin();
         String authenticationData = cardReader.readAuthenticationData();
-        Responce<Card> authenticationResponce = processing.decodeAuthenticationData(authenticationData, pinCode);
-        if (authenticationResponce.isError()) {
-            display.showError(authenticationResponce.getErrorMessage());
+        Responce<CardDTO> authenticationResponse = processing.decodeAuthenticationData(authenticationData, pinCode);
+        if (authenticationResponse.isError()) {
+            display.showError(authenticationResponse.getErrorMessage());
             return false;
         }
-        card = authenticationResponce.getResponseValue();
+        CardDTO cardDTO = authenticationResponse.getResponseValue();
+        card = cardMapper.toModel(cardDTO);
         return true;
     }
 
     private boolean checkInitClient() {
-        Responce<Client> clientResponce = processing.getClientByCard(card);
-        if (clientResponce.isError()) {
-            display.showError(clientResponce.getErrorMessage());
+        Responce<ClientDTO> clientResponse = processing.getClientByCard(cardMapper.toDTO(card));
+        if (clientResponse.isError()) {
+            display.showError(clientResponse.getErrorMessage());
             return false;
         }
-        client = clientResponce.getResponseValue();
+        client = clientMapper.toModel(clientResponse.getResponseValue());
         return true;
     }
 }

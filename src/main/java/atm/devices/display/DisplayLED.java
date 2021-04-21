@@ -1,7 +1,7 @@
 package atm.devices.display;
 
-import bank.client.Client;
-import bank.services.operation.Balance;
+import atm.balance.BalanceData;
+import atm.client.ClientData;
 
 import java.text.DecimalFormat;
 
@@ -12,13 +12,13 @@ public class DisplayLED implements Display {
     }
 
     @Override
-    public void showWelcomeClient(Client client) {
+    public void showWelcomeClient(ClientData client) {
         String welcome = "Здравствуйте, " + client.getName();
         System.out.println(welcome);
     }
 
     @Override
-    public void showBalance(Balance balance) {
+    public void showBalance(BalanceData balance) {
         DecimalFormat formatter = new DecimalFormat("##.00");
         String balanceMessage = "Ваш баланс на текущий момент: "
                 + formatter.format(balance.getAmount()) + " "
