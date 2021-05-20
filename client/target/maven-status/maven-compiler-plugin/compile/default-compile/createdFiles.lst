@@ -1,0 +1,15 @@
+ru\sbrf\client\balance\BalanceData.class
+main.class
+ru\sbrf\client\devices\display\Display.class
+ru\sbrf\client\mappers\BalanceMapper.class
+ru\sbrf\client\devices\input\InputKeyBoard.class
+ru\sbrf\client\client\ClientData.class
+ru\sbrf\client\mappers\CardMapper.class
+ru\sbrf\client\Terminal.class
+ru\sbrf\client\devices\display\DisplayLED.class
+ru\sbrf\client\devices\cardreader\CardReaderDefault.class
+ru\sbrf\client\card\CardData.class
+ru\sbrf\client\devices\cardreader\CardReader.class
+ru\sbrf\client\TerminalDefault.class
+ru\sbrf\client\mappers\ClientMapper.class
+ru\sbrf\client\devices\input\InputReader.class
