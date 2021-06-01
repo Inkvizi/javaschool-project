@@ -1,9 +1,9 @@
 DROP TABLE IF EXISTS Clients_Accounts;
 DROP TABLE IF EXISTS Clients;
-DROP TABLE IF EXISTS AddressDict;
-DROP TABLE IF EXISTS StreetDict;
-DROP TABLE IF EXISTS CityDict;
-DROP TABLE IF EXISTS CountryDict;
+DROP TABLE IF EXISTS Address_Dict;
+DROP TABLE IF EXISTS Street_Dict;
+DROP TABLE IF EXISTS City_Dict;
+DROP TABLE IF EXISTS Country_Dict;
 DROP TABLE IF EXISTS Accounts_Cards;
 DROP TABLE IF EXISTS Accounts;
 DROP TABLE IF EXISTS Cards;
@@ -11,7 +11,8 @@ DROP TABLE IF EXISTS Cards;
 CREATE TABLE Cards (
   id INT AUTO_INCREMENT  PRIMARY KEY,
   number CHAR (10) NOT NULL,
-  pin CHAR (4) NOT NULL
+  pin CHAR (4) NOT NULL,
+  expiration_date DATE NOT NULL
 );
 
 CREATE TABLE Accounts (
@@ -24,36 +25,36 @@ CREATE TABLE Accounts (
 CREATE TABLE Accounts_Cards (
   id INT AUTO_INCREMENT PRIMARY KEY,
   account_id INT NOT NULL,
-  card_id INT NOT NULL UNIQUE,
+  cards_id INT NOT NULL UNIQUE,
   FOREIGN KEY (account_id) REFERENCES Accounts(id),
-  FOREIGN KEY (card_id) REFERENCES Cards(id)
+  FOREIGN KEY (cards_id) REFERENCES Cards(id)
 );
 
-CREATE TABLE CountryDict (
+CREATE TABLE Country_Dict (
   id INT AUTO_INCREMENT PRIMARY KEY,
   country VARCHAR (240)
 );
 
-CREATE TABLE CityDict (
+CREATE TABLE City_Dict (
   id INT AUTO_INCREMENT PRIMARY KEY,
   country_id INT NOT NULL,
   city VARCHAR (240),
-  FOREIGN KEY (country_id) REFERENCES CountryDict(id)
+  FOREIGN KEY (country_id) REFERENCES Country_Dict(id)
 );
 
-CREATE TABLE StreetDict (
+CREATE TABLE Street_Dict (
   id INT AUTO_INCREMENT PRIMARY KEY,
   city_id INT NOT NULL,
   street VARCHAR (240),
-  FOREIGN KEY (city_id) REFERENCES CityDict(id)
+  FOREIGN KEY (city_id) REFERENCES City_Dict(id)
 );
 
-CREATE TABLE AddressDict (
+CREATE TABLE Address_Dict (
   id INT AUTO_INCREMENT PRIMARY KEY,
   street_id INT NOT NULL,
   house INT NOT NULL,
   flat INT NOT NULL,
-  FOREIGN KEY (street_id) REFERENCES StreetDict(id)
+  FOREIGN KEY (street_id) REFERENCES Street_Dict(id)
 );
 
 CREATE TABLE Clients (
@@ -62,47 +63,47 @@ CREATE TABLE Clients (
   code VARCHAR (20) NOT NULL,
   age INT NOT NULL,
   address_id INT NOT NULL,
-  FOREIGN KEY (address_id) REFERENCES AddressDict(id)
+  FOREIGN KEY (address_id) REFERENCES Address_Dict(id)
 );
 
 CREATE TABLE Clients_Accounts (
   id INT AUTO_INCREMENT PRIMARY KEY,
   client_id INT NOT NULL,
-  account_id INT NOT NULL UNIQUE,
+  accounts_id INT NOT NULL UNIQUE,
   FOREIGN KEY (client_id) REFERENCES Clients(id),
-  FOREIGN KEY (account_id) REFERENCES Accounts(id)
+  FOREIGN KEY (accounts_id) REFERENCES Accounts(id)
 );
 
-INSERT INTO Cards (number, pin) VALUES
-  ('1111122222', '1111'),
-  ('2222233333', '2222'),
-  ('3333344444', '3333'),
-  ('4444455555', '4444');
+INSERT INTO Cards (number, pin, expiration_date) VALUES
+  ('1111122222', '1111', '2022-12-20'),
+  ('2222233333', '2222', '2021-05-24'),
+  ('3333344444', '3333', '2018-01-20'),
+  ('4444455555', '4444', '2023-09-17');
 
 INSERT INTO Accounts (number, balance) VALUES
   ('1111222233334444', 300),
   ('5555666677778888', 150),
   ('3333444455556666', 200);
 
-INSERT INTO Accounts_Cards (card_id, account_id) VALUES
+INSERT INTO Accounts_Cards (cards_id, account_id) VALUES
   (1, 2),
   (2, 3),
   (3, 2),
   (4, 1);
 
-INSERT INTO CountryDict (country) VALUES
+INSERT INTO Country_Dict (country) VALUES
   ('Россия');
 
-INSERT INTO CityDict (country_id, city) VALUES
+INSERT INTO City_Dict (country_id, city) VALUES
   (1, 'Москва'),
   (1, 'Ростов');
 
-INSERT INTO StreetDict (city_id, street) VALUES
+INSERT INTO Street_Dict (city_id, street) VALUES
   (1, 'Кутузовский проспект'),
   (2, 'улица Садовая'),
   (1, 'улица Тверская');
 
-INSERT INTO AddressDict (street_id, house, flat) VALUES
+INSERT INTO Address_Dict (street_id, house, flat) VALUES
   (1, 23, 570),
   (2, 12, 340),
   (1, 2, 43),
@@ -112,7 +113,7 @@ INSERT INTO Clients (name, code, age, address_id) VALUES
   ('Иванов Иван Иванович', '111', 34, 1),
   ('Петров Петр Петрович', '222', 25, 4);
 
-INSERT INTO Clients_Accounts (client_id, account_id) VALUES
+INSERT INTO Clients_Accounts (client_id, accounts_id) VALUES
   (1, 2),
   (2, 1),
   (2, 3);

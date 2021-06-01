@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "Cards")
@@ -20,4 +21,6 @@ public class Card {
 
     @Size(message = "Пинкод карты должен быть 4 смивола", min = 4, max = 4)
     private String pin;
+
+    private LocalDate expirationDate;
 }

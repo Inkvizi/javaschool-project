@@ -1,5 +1,6 @@
 package github.marinets.atm.server.controller;
 
+import github.marinets.atm.common.dto.BalanceDTO;
 import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.web.bind.annotation.*;
@@ -30,10 +31,10 @@ public class HostRestController {
         }
     }
 
-    @PostMapping("/hosts/{hostId}/decodeAuthenticationData/{authenticationData}{pinCode}")
+    @PostMapping("/hosts/{hostId}/decodeAuthenticationData")
     public Responce<CardDTO> decodeAuthenticationData(@PathVariable Long hostId,
-                                                      @PathVariable String authenticationData,
-                                                      @PathVariable String pinCode) {
+                                                      @RequestParam ("authenticationData") String authenticationData,
+                                                      @RequestParam ("pinCode") String pinCode) {
         if (hostId != 1) {
             throw new HostNotFoundException();
         }
@@ -53,6 +54,19 @@ public class HostRestController {
 
         log.info(cardDTO.toString());
         Responce<ClientDTO> response = processing.getClientByCard(cardDTO);
+        log.info(response.toString());
+        return response;
+    }
+
+    @PostMapping("/hosts/{hostId}/getBalance/")
+    public Responce<BalanceDTO> getBalance(@PathVariable("hostId") Long hostId,
+                                               @RequestBody CardDTO cardDTO) {
+        if (hostId != 1) {
+            throw new RuntimeException("Host " + hostId + " is not ready!");
+        }
+
+        log.info(cardDTO.toString());
+        Responce<BalanceDTO> response = processing.getBalance(cardDTO);
         log.info(response.toString());
         return response;
     }

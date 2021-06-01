@@ -7,7 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "CountryDict")
+@Table(name = "Country_Dict")
 @NoArgsConstructor
 @Data
 public class CountryDict {

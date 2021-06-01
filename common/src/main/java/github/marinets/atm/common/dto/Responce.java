@@ -1,10 +1,13 @@
 package github.marinets.atm.common.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
-@Getter
+@Data
+@NoArgsConstructor
 public class Responce<T> {
     private ResponceErrorCodes errorCode;
     private String errorMessage;

@@ -11,6 +11,6 @@ import java.time.LocalDate;
 @Data
 public class CardDTO {
     String number;
-    LocalDate expirationeDate;
+    LocalDate expirationDate;
     String pinCode;
 }

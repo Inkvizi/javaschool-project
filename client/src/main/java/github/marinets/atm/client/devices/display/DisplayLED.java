@@ -1,7 +1,7 @@
 package github.marinets.atm.client.devices.display;
 
-import github.marinets.atm.client.balance.BalanceData;
-import github.marinets.atm.client.client.ClientData;
+import github.marinets.atm.client.domain.Balance;
+import github.marinets.atm.client.domain.Client;
 
 import java.text.DecimalFormat;
 
@@ -12,13 +12,13 @@ public class DisplayLED implements Display {
     }
 
     @Override
-    public void showWelcomeClient(ClientData client) {
+    public void showWelcomeClient(Client client) {
         String welcome = "Здравствуйте, " + client.getName();
         System.out.println(welcome);
     }
 
     @Override
-    public void showBalance(BalanceData balance) {
+    public void showBalance(Balance balance) {
         DecimalFormat formatter = new DecimalFormat("##.00");
         String balanceMessage = "Ваш баланс на текущий момент: "
                 + formatter.format(balance.getAmount()) + " "

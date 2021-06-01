@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "AddressDict")
+@Table(name = "Address_Dict")
 @NoArgsConstructor
 @Data
 public class AddressDict {
@@ -14,9 +14,9 @@ public class AddressDict {
     @GeneratedValue
     private long id;
 
-    private Long house;
+    private int house;
 
-    private Long flat;
+    private int flat;
 
     @ManyToOne
     @JoinColumn(name = "street_id", nullable = false)

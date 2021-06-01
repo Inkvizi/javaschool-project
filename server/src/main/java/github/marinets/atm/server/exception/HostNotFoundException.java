@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class HostNotFoundException extends RuntimeException {
     public HostNotFoundException() {
+        super("Хост не найден");
     }
 
     public HostNotFoundException(String message) {
