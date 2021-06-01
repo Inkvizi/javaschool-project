@@ -1,0 +1,15 @@
+ru\sbrf\server\card\Card.class
+ru\sbrf\server\Processing.class
+ru\sbrf\server\card\CardClient.class
+ru\sbrf\server\mappers\CardClientMapper.class
+ru\sbrf\server\client\Address.class
+ru\sbrf\server\client\Client.class
+ru\sbrf\server\mappers\ClientMapper.class
+ru\sbrf\server\client\Account.class
+ru\sbrf\server\client\AddressDefault.class
+ru\sbrf\server\operation\Balance.class
+ru\sbrf\server\operation\BalanceCard.class
+ru\sbrf\server\operation\BalanceCardCredit.class
+ru\sbrf\server\client\ClientData.class
+ru\sbrf\server\mappers\BalanceMapper.class
+ru\sbrf\server\operation\BalanceCardDebet.class
